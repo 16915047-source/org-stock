@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Outer ellipse ring -->
+  <ellipse cx="100" cy="100" rx="95" ry="95" fill="#1B2A5B"/>
+  <ellipse cx="100" cy="100" rx="88" ry="88" fill="#FFD700"/>
+  <ellipse cx="100" cy="100" rx="82" ry="82" fill="#1B2A5B"/>
+  
+  <!-- Inner shield / emblem background -->
+  <circle cx="100" cy="100" r="70" fill="#1B2A5B"/>
+  
+  <!-- Stylized Phra That Chedi / Crown (simplified Royal Emblem) -->
+  <!-- Base platform -->
+  <rect x="70" y="130" width="60" height="6" rx="2" fill="#FFD700"/>
+  <rect x="75" y="124" width="50" height="6" rx="2" fill="#FFD700"/>
+  
+  <!-- Temple body -->
+  <polygon points="100,38 80,90 120,90" fill="#FFD700"/>
+  <polygon points="100,32 85,80 115,80" fill="white" opacity="0.15"/>
+  
+  <!-- Tiered umbrella / Chatra (7-tier Svet Chatra) -->
+  <line x1="100" y1="30" x2="100" y2="90" stroke="#FFD700" stroke-width="2"/>
+  <ellipse cx="100" cy="40" rx="18" ry="3" fill="#FFD700"/>
+  <ellipse cx="100" cy="47" rx="15" ry="2.5" fill="#FFD700"/>
+  <ellipse cx="100" cy="53" rx="12" ry="2" fill="#FFD700"/>
+  <ellipse cx="100" cy="58" rx="10" ry="1.8" fill="#FFD700"/>
+  <ellipse cx="100" cy="63" rx="8" ry="1.5" fill="#FFD700"/>
+  
+  <!-- Radiating sun rays -->
+  <g stroke="#FFD700" stroke-width="1.5" opacity="0.7">
+    <line x1="100" y1="90" x2="60" y2="110"/>
+    <line x1="100" y1="90" x2="65" y2="118"/>
+    <line x1="100" y1="90" x2="140" y2="110"/>
+    <line x1="100" y1="90" x2="135" y2="118"/>
+    <line x1="100" y1="90" x2="55" y2="100"/>
+    <line x1="100" y1="90" x2="145" y2="100"/>
+  </g>
+  
+  <!-- Circular disc (Chakra) -->
+  <circle cx="100" cy="102" r="20" stroke="#FFD700" stroke-width="2.5" fill="none"/>
+  <circle cx="100" cy="102" r="14" stroke="#FFD700" stroke-width="1" fill="none" opacity="0.5"/>
+  
+  <!-- Center "อุ" symbol (simplified) -->
+  <text x="100" y="109" text-anchor="middle" font-size="18" font-weight="bold" fill="#FFD700" font-family="serif">๙</text>
+  
+  <!-- Bottom decorative arc -->
+  <path d="M70,130 Q100,145 130,130" stroke="#FFD700" stroke-width="2" fill="none"/>
+  
+  <!-- Top text arc: มหาวิทยาลัยราชภัฏพระนครศรีอยุธยา -->
+  <path id="topArc" d="M30,100 A70,70 0 0,1 170,100" fill="none"/>
+  <text font-size="9" fill="#FFD700" font-weight="bold" font-family="sans-serif">
+    <textPath href="#topArc" startOffset="50%" text-anchor="middle">มหาวิทยาลัยราชภัฏพระนครศรีอยุธยา</textPath>
+  </text>
+  
+  <!-- Bottom text arc: ARU -->
+  <path id="bottomArc" d="M35,110 A65,65 0 0,0 165,110" fill="none"/>
+  <text font-size="10" fill="#FFD700" font-weight="bold" font-family="sans-serif" letter-spacing="6">
+    <textPath href="#bottomArc" startOffset="50%" text-anchor="middle">A R U</textPath>
+  </text>
+</svg>
