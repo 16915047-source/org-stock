@@ -7,6 +7,8 @@ interface CameraProps {
   label?: string;
 }
 
+type CameraFacingMode = 'user' | 'environment';
+
 export default function Camera({ onCapture, label = 'ถ่ายรูปหน้าคู่กับอุปกรณ์' }: CameraProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -16,7 +18,7 @@ export default function Camera({ onCapture, label = 'ถ่ายรูปหน
   const [cameraError, setCameraError] = useState('');
   const streamRef = useRef<MediaStream | null>(null);
 
-  const startCamera = useCallback(async () => {
+  const startCamera = useCallback(async (facingMode: CameraFacingMode) => {
     setCameraError('');
     setIsVideoReady(false);
     if (!navigator.mediaDevices?.getUserMedia) {
@@ -27,7 +29,7 @@ export default function Camera({ onCapture, label = 'ถ่ายรูปหน
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
         video: {
-          facingMode: { ideal: 'user' },
+          facingMode: facingMode === 'environment' ? { exact: facingMode } : { ideal: facingMode },
           width: { ideal: 640 },
           height: { ideal: 480 },
         },
@@ -41,6 +43,8 @@ export default function Camera({ onCapture, label = 'ถ่ายรูปหน
         setCameraError('ไม่ได้รับอนุญาตให้ใช้กล้อง กรุณาอนุญาตสิทธิ์กล้องจากเบราว์เซอร์');
       } else if (name === 'NotFoundError' || name === 'DevicesNotFoundError') {
         setCameraError('ไม่พบกล้องที่เชื่อมต่อกับอุปกรณ์นี้');
+      } else if (name === 'OverconstrainedError' && facingMode === 'environment') {
+        setCameraError('ไม่พบกล้องหลังในอุปกรณ์นี้ กรุณาเลือกเปิดกล้องหน้า');
       } else {
         setCameraError('เปิดกล้องไม่สำเร็จ กรุณาตรวจสอบสิทธิ์กล้องและลองใหม่');
       }
@@ -156,14 +160,22 @@ export default function Camera({ onCapture, label = 'ถ่ายรูปหน
           </div>
         </div>
       ) : (
-        <div>
+        <div className="grid grid-cols-2 gap-2">
           <button
             type="button"
-            onClick={startCamera}
+            onClick={() => startCamera('user')}
             className="w-full h-12 px-3 border border-slate-200 bg-white text-slate-800 rounded-xl hover:border-slate-300 hover:bg-slate-50 transition-colors text-xs font-bold flex items-center justify-center gap-2"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" className="w-4 h-4"><path d="M4 7.5h3l1.5-2h7l1.5 2h3v11H4z" /><circle cx="12" cy="13" r="3.5" /></svg>
-            เปิดกล้อง
+            เปิดกล้องหน้า
+          </button>
+          <button
+            type="button"
+            onClick={() => startCamera('environment')}
+            className="w-full h-12 px-3 border border-slate-200 bg-white text-slate-800 rounded-xl hover:border-slate-300 hover:bg-slate-50 transition-colors text-xs font-bold flex items-center justify-center gap-2"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" className="w-4 h-4"><path d="M4 7.5h3l1.5-2h7l1.5 2h3v11H4z" /><circle cx="12" cy="13" r="3.5" /></svg>
+            เปิดกล้องหลัง
           </button>
         </div>
       )}
